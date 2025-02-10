@@ -32,8 +32,8 @@ class Categoria extends Conectar{
          parent::set_names(); 
          $sql="INSERT INTO categoria (categoria_id, categoria_nombre, categoria_observacion, estado) VALUES (NULL,?,?,'1');" ;
          $sql=$conectar->prepare($sql);
-         $sql->bindValue(1,$categoria_nombre);
-         $sql->bindValue(2,$categoria_observacion);
+         $sql->bindValue(1,$categoria_nombre);  //indice 1 de los parametros de la función
+         $sql->bindValue(2,$categoria_observacion); //indice 2 de los parametros de la función
          $sql->execute();         
          return $resultado =$sql->fetch(PDO::FETCH_ASSOC); //muestra respuesta
          
