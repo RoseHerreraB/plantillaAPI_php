@@ -18,8 +18,25 @@ switch ($_GET ["op"]){
     break;
     case "Insert":
         $datos=$categoria->insert_categoria($body["categoria_nombre"], $body["categoria_observacion"]);
-        echo json_encode("correcto");
+        echo json_encode("Insert correct");
     break;
+
+    case "Update":
+        $datos=$categoria->update_categoria($body["categoria_id"],$body["categoria_nombre"], $body["categoria_observacion"]);
+        echo json_encode(" Update correct");
+    break;
+    case "DeleteEstado":  //eliminar cambiando el estado a 0 para tener un backup  - es más usado que eliminar permanentemente  - recordando que  solo mostrara la info con estado 1 
+        $datos=$categoria->deleteEstado_categoria($body["categoria_id"]);
+        echo json_encode("Delete 'Estado a 0' correct");
+    break;
+
+
+
+    case "Delete":  //eliminar permanetemente 
+        $datos=$categoria->delete_categoria($body["categoria_id"]);
+        echo json_encode("Delete correct");
+    break;
+
 }
 
 

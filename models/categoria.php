@@ -38,5 +38,44 @@ class Categoria extends Conectar{
          return $resultado =$sql->fetch(PDO::FETCH_ASSOC); //muestra respuesta
          
         }
+
+    
+         // funcion para actualizar
+         public function  update_categoria($categoria_id,$categoria_nombre, $categoria_observacion){
+            $conectar= parent::Conexion(); 
+             parent::set_names(); 
+             $sql="UPDATE categoria SET categoria_nombre = ?, categoria_observacion = ? WHERE categoria_id = ?; " ;
+             $sql=$conectar->prepare($sql);
+             $sql->bindValue(1,$categoria_nombre);  //indice 1 de los parametros de la función
+             $sql->bindValue(2,$categoria_observacion); //indice 2 de los parametros de la función
+             $sql->bindValue(3,$categoria_id);
+             $sql->execute();         
+             return $resultado =$sql->fetch(PDO::FETCH_ASSOC); //muestra respuesta
+             
+            }
+
+              // funcion para Eliminar cambiando solamente el estado a 0 para no mostrarlo
+         public function  deleteEstado_categoria($categoria_id){
+            $conectar= parent::Conexion(); 
+             parent::set_names(); 
+             $sql="UPDATE categoria SET estado = '0' WHERE categoria_id = ?;" ;
+             $sql=$conectar->prepare($sql);
+             $sql->bindValue(1,$categoria_id);
+             $sql->execute();         
+             return $resultado =$sql->fetch(PDO::FETCH_ASSOC); //muestra respuesta
+             
+            }
+
+             // funcion para Eliminar permanentemente 
+         public function  delete_categoria($categoria_id){
+            $conectar= parent::Conexion(); 
+             parent::set_names(); 
+             $sql="DELETE FROM categoria WHERE categoria_id = ?" ;
+             $sql=$conectar->prepare($sql);
+             $sql->bindValue(1,$categoria_id);
+             $sql->execute();         
+             return $resultado =$sql->fetch(PDO::FETCH_ASSOC); //muestra respuesta
+             
+            }
 }
 ?>
